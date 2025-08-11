@@ -19,11 +19,11 @@ Flexible configuration: Easily define sector links, pagination, and scraping par
 
 # Repository Structure: 
 
-📂 project_root
-│── contact_details_validation.py   # Email & contact validation utilities
-│── core_datastructures.py          # Core data classes (CompanyInfo, DirectoryConfig, ScrapingStats)
-│── DataProcessor.py                # Functions to deduplicate companies & emails
-│── README.md                       # User guide (this file)
+      📂 project_root
+      │── contact_details_validation.py   # Email & contact validation utilities
+      │── core_datastructures.py          # Core data classes (CompanyInfo, DirectoryConfig, ScrapingStats)
+      │── DataProcessor.py                # Functions to deduplicate companies & emails
+      │── README.md                       # User guide (this file)
 
 # How to Search for Sectors in Europages
 1. **Identify the sector keyword**
@@ -34,25 +34,25 @@ Examples: "winery", "machinery", "organic food", "IT services".
    Example:
    from core_datastructures import DirectoryConfig
       
-      config = DirectoryConfig(
-          name="Winery Sector",
-          base_url="https://www.europages.com/companies/winery.html",
-          sector_link=".company-name a",  # CSS selector for profile links
-          paginatation_selector=".pagination a",
-          max_pages=5,
-          rate_limit_seconds=2.0)
+         config = DirectoryConfig(
+             name="Winery Sector",
+             base_url="https://www.europages.com/companies/winery.html",
+             sector_link=".company-name a",  # CSS selector for profile links
+             paginatation_selector=".pagination a",
+             max_pages=5,
+             rate_limit_seconds=2.0)
    
   5. **Scrape company profiles**
         - Loop through sector pages.
         - Extract CompanyInfo objects.
   6. Validate & filter contact details
      Example: 
-     from contact_details_validation import ContactValidator
-    
-    validator = ContactValidator(custom_business_domains={"winery", "vineyard"})
-    is_valid = validator.email.is_valid_email("info@winery-example.com")
-    is_business = validator.email.is_business_email("info@winery-example.com")
-    
+         from contact_details_validation import ContactValidator
+         
+         validator = ContactValidator(custom_business_domains={"winery", "vineyard"})
+         is_valid = validator.email.is_valid_email("info@winery-example.com")
+         is_business = validator.email.is_business_email("info@winery-example.com")
+
   7. Clean data
      from DataProcessor import DataProcessor
 
@@ -61,16 +61,60 @@ Examples: "winery", "machinery", "organic food", "IT services".
 
 # Main Steps – Process Flow
 Below is a high-level process diagram for sector searching and data processing:
-flowchart TD
-    A[Start: Define Sector Keyword] --> B[Set DirectoryConfig Parameters]
-    B --> C[Scrape Europages Sector Pages]
-    C --> D[Extract CompanyInfo Objects]
-    D --> E[Validate Email Formats]
-    E --> F[Check Business vs Personal Domains]
-    F --> G[Remove Duplicate Companies]
-    G --> H[Remove Duplicate Emails]
-    H --> I[Save & Export Clean Data]
-    I --> J[End]
+                  +--------------------------+
+                  | Start: Define Sector     |
+                  | Keyword                  |
+                  +-----------+--------------+
+                              |
+                              v
+                  +-----------+--------------+
+                  | Set DirectoryConfig       |
+                  | Parameters                |
+                  +-----------+--------------+
+                              |
+                              v
+                  +-----------+--------------+
+                  | Scrape Europages Sector  |
+                  | Pages                    |
+                  +-----------+--------------+
+                              |
+                              v
+                  +-----------+--------------+
+                  | Extract CompanyInfo      |
+                  | Objects                  |
+                  +-----------+--------------+
+                              |
+                              v
+                  +-----------+--------------+
+                  | Validate Email Formats   |
+                  +-----------+--------------+
+                              |
+                              v
+                  +-----------+--------------+
+                  | Check Business vs        |
+                  | Personal Domains         |
+                  +-----------+--------------+
+                              |
+                              v
+                  +-----------+--------------+
+                  | Remove Duplicate         |
+                  | Companies                |
+                  +-----------+--------------+
+                              |
+                              v
+                  +-----------+--------------+
+                  | Remove Duplicate Emails  |
+                  +-----------+--------------+
+                              |
+                              v
+                  +-----------+--------------+
+                  | Save & Export Clean Data |
+                  +-----------+--------------+
+                              |
+                              v
+                  +-----------+--------------+
+                  | End                       |
+                  +--------------------------+
 
 # Approach Summary
 1.Sector Selection
