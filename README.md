@@ -61,6 +61,7 @@ Examples: "winery", "machinery", "organic food", "IT services".
 
 # Main Steps – Process Flow
 Below is a high-level process diagram for sector searching and data processing:
+                  '''
                   +--------------------------+
                   | Start: Define Sector     |
                   | Keyword                  |
@@ -115,6 +116,7 @@ Below is a high-level process diagram for sector searching and data processing:
                   +-----------+--------------+
                   |           End            |
                   +--------------------------+
+                  '''
 
 # Approach Summary
 1.Sector Selection
