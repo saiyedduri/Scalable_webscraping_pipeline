@@ -24,7 +24,7 @@ It includes functionality for:
       │── DataProcessor.py                # Functions to deduplicate companies & emails
       │── README.md                       # User guide (this file)
 
-# How to Search for Sectors in Europages
+# Parameters for setup of data collection pipeline: 
 1. **Identify the sector keyword**
 Examples: "winery", "machinery", "organic food", "IT services".
 2. **Find the base URL on Europages**
