@@ -59,7 +59,8 @@ Examples: "winery", "machinery", "organic food", "IT services".
 
 # Main Steps – Process Flow: A high-level process diagram for sector searching and data processing. 
                                                       +--------------------------+
-                                                      | Start: Define Sector     |
+                                                      | Start: Define multiple 
+                                                        Sector                   |
                                                       | spefcific webpage
                                                         from directory           |
                                                       +-----------+--------------+
