@@ -126,15 +126,14 @@ Examples: "winery", "machinery", "organic food", "IT services".
    - Loop through pages, extract profile URLs, company names, countries, and contact details.
 
 4. Validation
-
-  - Use regex-based email format checks.
+    - Use regex-based email format checks.
   
-  - Filter out personal email providers.
+    - Filter out personal email providers.
   
-  - Cleaning
+    - Cleaning
   
-  - Deduplicate by company URL.
+    - Deduplicate by company URL.
   
-  - Deduplicate emails across companies.
+    - Deduplicate emails across companies.
   
-  - Export and Store results as CSV
+    - Export and Store results as CSV
