@@ -113,7 +113,7 @@ Below is a high-level process diagram for sector searching and data processing:
                               |
                               v
                   +-----------+--------------+
-                  | End                       |
+                  |           End            |
                   +--------------------------+
 
 # Approach Summary
