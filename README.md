@@ -29,7 +29,6 @@ Flexible configuration: Easily define sector links, pagination, and scraping par
 1. **Identify the sector keyword**
 Examples: "winery", "machinery", "organic food", "IT services".
 2. **Find the base URL on Europages**
-   Example:https://www.europages.com/companies/winery.html
 3. **Configure DirectoryConfig** (in core_datastructures.py)
    Example:
    from core_datastructures import DirectoryConfig
