@@ -1,5 +1,6 @@
 # Scalable_webscraping_pipeline
 This repository provides tools to extract contact information from  a public directory(specifically designed for Europages) focusing on different industry sectors at the same time. 
+
 It includes functionality for:
 
   - Scraping company profiles.
