@@ -3,10 +3,8 @@ This repository provides tools to extract contact information from  a public dir
 
 It includes functionality for:
 
-  - Scraping company profiles.
-
-  - Extracting and validating contact details (emails, websites, etc.).
-
+  -  Collecting contact deatils such as  contact details (emails, websites, etc.) of the businesses in the mentioned sector.
+    
   - Cleaning and deduplicating company and email records.
 
 # Designed Features
