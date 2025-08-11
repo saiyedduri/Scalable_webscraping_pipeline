@@ -59,8 +59,7 @@ Examples: "winery", "machinery", "organic food", "IT services".
     companies = DataProcessor.deduplicate_companies(companies)
     companies = DataProcessor.deduplicate_emails(companies)
 
-# Main Steps – Process Flow
-      Below is a high-level process diagram for sector searching and data processing:
+# Main Steps – Process Flow: A high-level process diagram for sector searching and data processing. 
                         '''
                         +--------------------------+
                         | Start: Define Sector     |
