@@ -60,63 +60,63 @@ Examples: "winery", "machinery", "organic food", "IT services".
     companies = DataProcessor.deduplicate_emails(companies)
 
 # Main Steps – Process Flow
-Below is a high-level process diagram for sector searching and data processing:
-                  '''
-                  +--------------------------+
-                  | Start: Define Sector     |
-                  | Keyword                  |
-                  +-----------+--------------+
-                              |
-                              v
-                  +-----------+--------------+
-                  | Set DirectoryConfig       |
-                  | Parameters                |
-                  +-----------+--------------+
-                              |
-                              v
-                  +-----------+--------------+
-                  | Scrape Europages Sector  |
-                  | Pages                    |
-                  +-----------+--------------+
-                              |
-                              v
-                  +-----------+--------------+
-                  | Extract CompanyInfo      |
-                  | Objects                  |
-                  +-----------+--------------+
-                              |
-                              v
-                  +-----------+--------------+
-                  | Validate Email Formats   |
-                  +-----------+--------------+
-                              |
-                              v
-                  +-----------+--------------+
-                  | Check Business vs        |
-                  | Personal Domains         |
-                  +-----------+--------------+
-                              |
-                              v
-                  +-----------+--------------+
-                  | Remove Duplicate         |
-                  | Companies                |
-                  +-----------+--------------+
-                              |
-                              v
-                  +-----------+--------------+
-                  | Remove Duplicate Emails  |
-                  +-----------+--------------+
-                              |
-                              v
-                  +-----------+--------------+
-                  | Save & Export Clean Data |
-                  +-----------+--------------+
-                              |
-                              v
-                  +-----------+--------------+
-                  |           End            |
-                  +--------------------------+
-                  '''
+      Below is a high-level process diagram for sector searching and data processing:
+                        '''
+                        +--------------------------+
+                        | Start: Define Sector     |
+                        | Keyword                  |
+                        +-----------+--------------+
+                                    |
+                                    v
+                        +-----------+--------------+
+                        | Set DirectoryConfig       |
+                        | Parameters                |
+                        +-----------+--------------+
+                                    |
+                                    v
+                        +-----------+--------------+
+                        | Scrape Europages Sector  |
+                        | Pages                    |
+                        +-----------+--------------+
+                                    |
+                                    v
+                        +-----------+--------------+
+                        | Extract CompanyInfo      |
+                        | Objects                  |
+                        +-----------+--------------+
+                                    |
+                                    v
+                        +-----------+--------------+
+                        | Validate Email Formats   |
+                        +-----------+--------------+
+                                    |
+                                    v
+                        +-----------+--------------+
+                        | Check Business vs        |
+                        | Personal Domains         |
+                        +-----------+--------------+
+                                    |
+                                    v
+                        +-----------+--------------+
+                        | Remove Duplicate         |
+                        | Companies                |
+                        +-----------+--------------+
+                                    |
+                                    v
+                        +-----------+--------------+
+                        | Remove Duplicate Emails  |
+                        +-----------+--------------+
+                                    |
+                                    v
+                        +-----------+--------------+
+                        | Save & Export Clean Data |
+                        +-----------+--------------+
+                                    |
+                                    v
+                        +-----------+--------------+
+                        |           End            |
+                        +--------------------------+
+                        '''
 
 # Approach Summary
 1.Sector Selection
