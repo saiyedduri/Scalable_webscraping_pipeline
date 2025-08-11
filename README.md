@@ -9,13 +9,13 @@ It includes functionality for:
   - Cleaning and deduplicating company and email records.
 
 # Designed Features
-Sector-based scraping: Search by industry or niche keywords.
+  - Sector-based scraping: Search by industry or niche keywords.
 
-Contact validation: Ensure emails are in a valid format and likely business-related.
+  - Contact validation: Ensure emails are in a valid format and likely business-related.
 
-Data cleaning: Remove duplicate companies and repeated email addresses.
+  - Data cleaning: Remove duplicate companies and repeated email addresses.
 
-Flexible configuration: Easily define sector links, pagination, and scraping parameters.
+  - Flexible configuration: Easily define sector links, pagination, and scraping parameters.
 
 # Repository Structure: 
 
