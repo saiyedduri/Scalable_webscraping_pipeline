@@ -2,11 +2,11 @@
 This repository provides tools to extract contact information from  a public directory(specifically designed for Europages) focusing on different industry sectors at the same time. 
 It includes functionality for:
 
-- Scraping company profiles.
+  - Scraping company profiles.
 
-- Extracting and validating contact details (emails, websites, etc.).
+  - Extracting and validating contact details (emails, websites, etc.).
 
-- Cleaning and deduplicating company and email records.
+  - Cleaning and deduplicating company and email records.
 
 # Designed Features
 Sector-based scraping: Search by industry or niche keywords.
