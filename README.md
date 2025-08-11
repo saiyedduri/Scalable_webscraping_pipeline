@@ -60,7 +60,6 @@ Examples: "winery", "machinery", "organic food", "IT services".
     companies = DataProcessor.deduplicate_emails(companies)
 
 # Main Steps – Process Flow: A high-level process diagram for sector searching and data processing. 
-                        '''
                         +--------------------------+
                         | Start: Define Sector     |
                         | Keyword                  |
@@ -115,8 +114,7 @@ Examples: "winery", "machinery", "organic food", "IT services".
                         +-----------+--------------+
                         |           End            |
                         +--------------------------+
-                        '''
-
+                        
 # Approach Summary
 1.Sector Selection
   - Identify the industry keyword and relevant Europages URL.
