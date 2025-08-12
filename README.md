@@ -1,5 +1,5 @@
 # Scalable_webscraping_pipeline
-This repository provides tools to collect contact information of suppliers in various sectors from public contact directory (designed specifically for Europages) focusing on different industry sectors at the same time. 
+This repository aims tools to collect contact information of suppliers in various sectors from public contact directory (designed specifically for Europages) focusing on different industry sectors at the same time. 
 
 It includes functionality for:
 
