@@ -1,11 +1,7 @@
 # Scalable_webscraping_pipeline
 This repository aims tools to collect contact information of suppliers in various sectors from public contact directory (designed specifically for Europages) focusing on different industry sectors at the same time. 
 
-It includes functionality for:
-
-  -  Collecting contact deatils such as  contact details (emails, websites, etc.) of the businesses in the mentioned sector.
-    
-  - Cleaning and deduplicating company and email records.
+The repository currently creates a database for  Bussiness email addresses, Company home pages. The pipeline can be easily extensible to collecting company contact numbers, and other details through adding further datastructures with Object oriented programming.
 
 # Designed Features
   - Sector-based scraping: Search by industry or niche keywords.
@@ -19,10 +15,23 @@ It includes functionality for:
 # Repository Structure: 
 
       📂 project_root
-      │── contact_details_validation.py   # Email & contact validation utilities
-      │── core_datastructures.py          # Core data classes (CompanyInfo, DirectoryConfig, ScrapingStats)
-      │── DataProcessor.py                # Functions to deduplicate companies & emails
-      │── README.md                       # User guide (this file)
+      project_root/
+      │
+      ├── /results
+          
+      
+      │── scripts ── __pycache__/                # Compiled Python bytecode
+                  │
+                  ├── BussinessScrapingpipeline.py  # Main pipeline for business scraping
+                  ├── contact_details_validation.py # Validation utilities for contact information
+                  ├── contact_extraction.py         # Logic for extracting contact details from scraped data
+                  ├── core_datastructures.py        # Core classes and data structures used across the project
+                  ├── CSVExporter.py                # Module for exporting processed data to CSV files
+                  ├── DataProcessor.py              # Data cleaning and transformation routines
+                  ├── directory_parser.py           # Parses directory listings for data sources
+                  ├── find_selectors.py             # Identifies CSS/HTML selectors for scraping
+                  └── webscraping.py                 # Core web scraping logic
+                  
 
 # Parameters for setup of data collection pipeline: 
 1. **Identify the sector keyword**
