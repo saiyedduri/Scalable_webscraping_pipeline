@@ -261,7 +261,9 @@ CANARY ISLAND WORLDWIDE S.L.,Spain,https://www.europages.co.uk/CANARY-ISLAND-WOR
 ### Emails CSV Format
 ```csv
 Company Name,Country,Company Website URL,Email
-ACME Winery,France,https://acmewinery.com,contact@acmewinery.com
+CANARY ISLAND WORLDWIDE S.L.,Spain,https://www.canaryislandworldwide.es,direccion@canaryislandworldwide.com
+CANARY ISLAND WORLDWIDE S.L.,Spain,https://www.canaryislandworldwide.es,info@canaryislandworldwide.com
+BODEGAS BOCOPA,Spain,https://www.bocopa.com/,enoteca@bocopa.com
 ```
 
 ## Performance Statistics
