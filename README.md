@@ -266,12 +266,4 @@ The pipeline provides comprehensive metrics:
 - Processing time and error counts
 - Geographic distribution analysis
 
-## Enhanced Features
-
-- **Multi-page Contact Extraction**: Automatically discovers and checks contact pages
-- **Intelligent Email Pattern Recognition**: Handles encoded, obfuscated, and spaced emails
-- **Geographic Context Validation**: Distinguishes company location from service areas
-- **Industry-Specific Validation**: Customizable domain keywords for each sector
-- **Comprehensive Deduplication**: URL-based company and cross-company email deduplication
-
 This architecture ensures robust, scalable, and maintainable business directory scraping with enterprise-grade data quality controls, multilingual support, and clear business value delivery at each stage.
