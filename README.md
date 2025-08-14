@@ -190,15 +190,18 @@ r'["\']mailto:[^"\']*["\']'
 ## File Structure
 
 ```
-├── BussinessScrapingpipeline.py    # Main pipeline orchestrator
-├── contact_details_validation.py   # Email validation and business filtering
-├── contact_extraction.py          # Enhanced multi-page contact extraction
-├── core_datastructures.py         # Data models and configuration classes
-├── CSVExporter.py                 # CSV export functionality
-├── DataProcessor.py               # Data cleaning and deduplication
-├── directory_parser.py            # Directory page parsing and pagination
-├── webscraping.py                 # Core scraping engine (Selenium + requests)
-└── results/                       # Output directory for CSV files and logs
+📂
+└── results/
+└── scripts/
+  ├── BussinessScrapingpipeline.py    # Main pipeline orchestrator
+  ├── contact_details_validation.py   # Email validation and business filtering
+  ├── contact_extraction.py          # Enhanced multi-page contact extraction
+  ├── core_datastructures.py         # Data models and configuration classes
+  ├── CSVExporter.py                 # CSV export functionality
+  ├── DataProcessor.py               # Data cleaning and deduplication
+  ├── directory_parser.py            # Directory page parsing and pagination
+  ├── webscraping.py                 # Core scraping engine (Selenium + requests)
+                      # Output directory for CSV files and logs
 ```
 
 ## Key Components
