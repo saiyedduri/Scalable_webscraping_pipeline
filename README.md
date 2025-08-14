@@ -254,7 +254,8 @@ pipeline.run_pipeline('wines', directory_config, limit_companies=20)
 ### Links CSV Format
 ```csv
 Company Name,Country,Europages URL,Company Website URL
-ACME Winery,France,https://europages.com/ACME-WINERY/...,https://acmewinery.com
+LA COMPAGNIE DE BURGONDIE,France,https://www.europages.co.uk/LA-COMPAGNIE-DE-BURGONDIE/00000005473718-001.html,https://www.burgondie.info/
+CANARY ISLAND WORLDWIDE S.L.,Spain,https://www.europages.co.uk/CANARY-ISLAND-WORLDWIDE-SL/00000005425544-763896001.html,https://www.canaryislandworldwide.es
 ```
 
 ### Emails CSV Format
