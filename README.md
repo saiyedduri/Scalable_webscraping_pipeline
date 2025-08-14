@@ -61,7 +61,7 @@ This pipeline orchestrates the extraction of company information from business d
 
 **Purpose:** Ensure data quality, filter spam, and maintain business-focused contact lists
 
-#### Email Regex Patterns:
+#### Email Regex Patterns used:
 
 ```python
 # Primary Pattern - Strict validation
