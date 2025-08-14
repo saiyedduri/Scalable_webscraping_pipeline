@@ -32,28 +32,21 @@ This pipeline orchestrates the extraction of company information from business d
 
 **Purpose:** Establish reliable, maintainable scraping parameters and handle dynamic content
 
-- **CSS Selector Strategy**: Utilized Europages-specific selectors (`a[data-test="company-name"]`) for reliable profile link extraction
-  - *Purpose*: Ensure consistent data extraction across Europages' standardized HTML structure
-- **Pagination Handling**: Configured `aria-label="Next page"` selectors with `max_pages` limits to control crawling scope
-  - *Purpose*: Systematically traverse multiple directory pages while preventing infinite loops and server overload
-- **Multi-Engine Support**: Implemented both Selenium and requests-based scraping with fallback mechanisms
-  - *Purpose*: Handle both static and JavaScript-rendered content while maintaining performance and reliability
-- **Rate Limiting**: Built-in delays (1-3 seconds) and request throttling to avoid server overload
-  - *Purpose*: Maintain ethical scraping practices and prevent IP blocking or server strain
+- **CSS Selector Strategy**: Utilized Europages-specific selectors (`a[data-test="company-name"]`) for reliable profile link extraction and ensure consistent data extraction across Europages' standardized HTML structure
+- **Pagination Handling**: Configured `aria-label="Next page"` selectors with `max_pages` limits  crawling scope and systematically traverse multiple directory pages while preventing infinite loops and server overload
+- **Multi-Engine Support**: Implemented both Selenium and requests-based scraping with fallback mechanisms. It handles both static and JavaScript-rendered content while maintaining performance and reliability
+- **Rate Limiting**: Built-in delays (1-3 seconds) and request throttling to avoid server overload It maintain ethical scraping practices and prevent IP blocking or server strain
 
 ### 3. Scraping
 
 **Purpose:** Extract comprehensive business data including contact discovery across multiple pages
 
-- **Multi-Page Architecture**: Sequential processing through directory pages using pagination selectors
-  - *Purpose*: Maximize data collection by accessing complete directory listings beyond first page
-- **Enhanced Data Extraction**: 
-  - Company names via multiple fallback strategies (link text, spans, URL parsing)
-    - *Purpose*: Ensure no company data is lost due to varying HTML structures
-  - Country extraction using Europages-specific patterns and geographical context validation
-    - *Purpose*: Enable geographic segmentation for targeted marketing campaigns
-  - Website URL extraction from profile pages with anti-spam filtering
-    - *Purpose*: Obtain direct company websites for comprehensive contact discovery
+- **Multi-Page Architecture**:  Maximize data collection by accessing complete directory listings beyond first page. Sequential processing through directory pages using pagination selectors
+- **Enhanced Data Extraction**: Ensure no company data is lost due to varying HTML structures.
+  - Company names via multiple fallback strategies (link text, spans, URL parsing).
+  - Country extraction using Europages-specific patterns and geographical context validation using geographic segmentation for targeted marketing campaigns
+  - Website URL extraction from profile pages with anti-spam filtering to btain direct company websites for comprehensive contact discovery.
+  - 
 - **Contact Page Discovery**: Implemented intelligent contact page detection using URL patterns (`/contact`, `/about`) and multilingual keyword matching
   - *Purpose*: Significantly increase email discovery rates by checking dedicated contact pages beyond homepages
 
