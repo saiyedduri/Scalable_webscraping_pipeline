@@ -201,7 +201,6 @@ r'["\']mailto:[^"\']*["\']'
   ├── DataProcessor.py               # Data cleaning and deduplication
   ├── directory_parser.py            # Directory page parsing and pagination
   ├── webscraping.py                 # Core scraping engine (Selenium + requests)
-                      # Output directory for CSV files and logs
 ```
 
 ## Key Components
