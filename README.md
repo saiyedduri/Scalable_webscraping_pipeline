@@ -178,14 +178,10 @@ r'["\']mailto:[^"\']*["\']'
 **Purpose:** Provide organized, actionable datasets for business development and marketing activities
 
 - **Structured CSV Output**: Generated two-tier export system:
-  - **Links CSV**: Company names, countries, Europages URLs, website URLs
-    - *Purpose*: Provide company discovery dataset for initial prospecting and research
-  - **Emails CSV**: Company names, countries, website URLs, extracted emails
-    - *Purpose*: Deliver actionable contact list ready for outreach campaigns
-- **Results Directory Management**: Organized outputs in dedicated `results/` folder with timestamped logging
-  - *Purpose*: Maintain organized data archives and enable process auditing
-- **Comprehensive Reporting**: Provided detailed statistics including success rates, email counts, and processing metrics
-  - *Purpose*: Enable performance monitoring, optimization decisions, and ROI assessment
+  - **Links CSV**: Provide company discovery dataset for initial prospecting and research.
+  - **Emails CSV**: Deliver actionable contact list ready for outreach campaigns
+- **Results Directory Management**: Maintain organized data archives and enable process auditing
+- **Comprehensive Reporting**: Enable performance monitoring, optimization decisions, and ROI assessment
 
 ## File Structure
 
