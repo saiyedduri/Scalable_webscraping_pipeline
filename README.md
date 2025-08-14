@@ -1,148 +1,284 @@
-# Scalable_webscraping_pipeline
-This repository aims tools to collect contact information of suppliers in various sectors from public contact directory (designed specifically for Europages) focusing on different industry sectors at the same time. 
+# Business Directory Scraping Pipeline
 
-The repository currently creates a database for  Bussiness email addresses, Company home pages. The pipeline can be easily extensible to collecting company contact numbers, and other details through adding further datastructures with Object oriented programming.
+A comprehensive web scraping solution designed to extract business contact information from Europages directory with enhanced multi-page contact discovery and intelligent data validation.
 
-# Designed Features
-  - Sector-based scraping: Search by industry or niche keywords.
+## Overview
 
-  - Contact validation: Ensure emails are in a valid format and likely business-related.
+This pipeline orchestrates the extraction of company information from business directories, focusing on email discovery through enhanced multi-page analysis including contact pages, about pages, and footer sections.
 
-  - Data cleaning: Remove duplicate companies and repeated email addresses.
+## Features
 
-  - Flexible configuration: Easily define sector links, pagination, and scraping parameters.
+- ✅ Multi-page contact extraction with contact page discovery
+- ✅ Industry-specific email validation
+- ✅ Geographic data extraction with multilingual support
+- ✅ Intelligent deduplication across companies
+- ✅ Both Selenium and requests-based scraping
+- ✅ Comprehensive data validation and cleaning
+- ✅ Structured CSV export with detailed reporting
 
-# Repository Structure: 
+## Architecture Overview
 
-      📂 project_root
-      project_root/
-      │
-      ├── /results
-          
-      
-      │── scripts ── __pycache__/                # Compiled Python bytecode
-                  │
-                  ├── BussinessScrapingpipeline.py  # Main pipeline for business scraping
-                  ├── contact_details_validation.py # Validation utilities for contact information
-                  ├── contact_extraction.py         # Logic for extracting contact details from scraped data
-                  ├── core_datastructures.py        # Core classes and data structures used across the project
-                  ├── CSVExporter.py                # Module for exporting processed data to CSV files
-                  ├── DataProcessor.py              # Data cleaning and transformation routines
-                  ├── directory_parser.py           # Parses directory listings for data sources
-                  ├── find_selectors.py             # Identifies CSS/HTML selectors for scraping
-                  └── webscraping.py                 # Core web scraping logic
-                  
+### 1. Sector Selection
 
-# Parameters for setup of data collection pipeline: 
-1. **Identify the sector keyword**
-Examples: "winery", "machinery", "organic food", "IT services".
-2. **Find the base URL on Europages**
-3. **Configure DirectoryConfig** (in core_datastructures.py)
-   Example:
-   from core_datastructures import DirectoryConfig
-      
-         config = DirectoryConfig(
-             name="Winery Sector",
-             base_url="https://www.europages.com/companies/winery.html",
-             sector_link=".company-name a",  # CSS selector for profile links
-             paginatation_selector=".pagination a",
-             max_pages=5,
-             rate_limit_seconds=2.0)
+**Purpose:** Target specific industries for focused lead generation and improve email validation accuracy
+
+- **Industry-Specific Targeting**: Defined sector-specific domain keywords (e.g., `wine_domains`, `cnc_domains`, `energy_storage_domains`) for enhanced email validation accuracy
+  - *Purpose*: Filter out irrelevant emails and improve business email detection rates by recognizing industry-specific domains
+- **Europages URL Mapping**: Created structured directory configurations mapping each sector to specific Europages category URLs (e.g., `/companies/wines.html`, `/companies/CNC.html`)
+  - *Purpose*: Ensure targeted scraping of relevant businesses within specific industry verticals
+- **Scalable Configuration**: Implemented dictionary-based sector definitions allowing easy addition of new industries
+  - *Purpose*: Enable rapid expansion to new market segments without code modifications
+
+### 2. Configuration
+
+**Purpose:** Establish reliable, maintainable scraping parameters and handle dynamic content
+
+- **CSS Selector Strategy**: Utilized Europages-specific selectors (`a[data-test="company-name"]`) for reliable profile link extraction
+  - *Purpose*: Ensure consistent data extraction across Europages' standardized HTML structure
+- **Pagination Handling**: Configured `aria-label="Next page"` selectors with `max_pages` limits to control crawling scope
+  - *Purpose*: Systematically traverse multiple directory pages while preventing infinite loops and server overload
+- **Multi-Engine Support**: Implemented both Selenium and requests-based scraping with fallback mechanisms
+  - *Purpose*: Handle both static and JavaScript-rendered content while maintaining performance and reliability
+- **Rate Limiting**: Built-in delays (1-3 seconds) and request throttling to avoid server overload
+  - *Purpose*: Maintain ethical scraping practices and prevent IP blocking or server strain
+
+### 3. Scraping
+
+**Purpose:** Extract comprehensive business data including contact discovery across multiple pages
+
+- **Multi-Page Architecture**: Sequential processing through directory pages using pagination selectors
+  - *Purpose*: Maximize data collection by accessing complete directory listings beyond first page
+- **Enhanced Data Extraction**: 
+  - Company names via multiple fallback strategies (link text, spans, URL parsing)
+    - *Purpose*: Ensure no company data is lost due to varying HTML structures
+  - Country extraction using Europages-specific patterns and geographical context validation
+    - *Purpose*: Enable geographic segmentation for targeted marketing campaigns
+  - Website URL extraction from profile pages with anti-spam filtering
+    - *Purpose*: Obtain direct company websites for comprehensive contact discovery
+- **Contact Page Discovery**: Implemented intelligent contact page detection using URL patterns (`/contact`, `/about`) and multilingual keyword matching
+  - *Purpose*: Significantly increase email discovery rates by checking dedicated contact pages beyond homepages
+
+### 4. Validation
+
+**Purpose:** Ensure data quality, filter spam, and maintain business-focused contact lists
+
+#### Email Regex Patterns:
+
+```python
+# Primary Pattern - Strict validation
+r'^[a-z0-9]([a-z0-9._-]*[a-z0-9])?@[a-z0-9]([a-z0-9.-]*[a-z0-9])?\.[a-z]{2,6}(\.[a-z]{2,3})?$'
+# Purpose: Strict validation ensuring only properly formatted email addresses are accepted
+
+# Flexible Pattern - Context-aware extraction
+r'\b[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9])?@[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?\.[A-Za-z]{2,6}(?:\.[A-Za-z]{2,3})?\b'
+# Purpose: Capture emails in varied text contexts with word boundaries
+
+# Encoded Email Pattern - HTML entity handling
+r'\b[A-Za-z_-]+&#64;[A-Za-z-]+\.[A-Za-z]{2,6}\b'
+# Purpose: Extract emails obfuscated with HTML entities to bypass basic spam protection
+
+# Spaced Email Pattern - Anti-scraping measures
+r'\b[A-Za-z_-]+\s*@\s*[A-Za-z-]+\.[A-Za-z]{2,6}\b'
+# Purpose: Capture emails with spacing used as anti-scraping measure
+
+# JavaScript Obfuscated - Mailto links
+r'["\']mailto:[^"\']*["\']'
+# Purpose: Extract emails from JavaScript-protected mailto links
+```
+
+#### Email Validation Methods:
+
+- **Business Email Filtering**: Excluded personal providers (`gmail.com`, `yahoo.com`, `hotmail.com`, `outlook.com`, `aol.com`, `icloud.com`, `mail.com`, `protonmail.com`)
+  - *Purpose*: Focus on business contacts and eliminate personal email addresses for B2B targeting
+- **Spam Pattern Detection**: Filtered emails containing `noreply`, `no-reply`, `donotreply`, `example`, `test@`, `admin@localhost`, `webmaster@`
+  - *Purpose*: Remove non-actionable and placeholder emails to improve contact list quality
+- **HTML Entity Decoding**: Converted `&#64;` to `@` and `&amp;` to `&`
+  - *Purpose*: Normalize encoded characters for proper email format validation
+
+### 5. Country Name Extraction Methods
+
+**Purpose:** Enable geographic segmentation, market analysis, and region-specific targeting
+
+#### Hierarchical Extraction Approach:
+
+1. **Europages-Specific Pattern** (Highest Priority):
+   ```python
+   # Target selectors
+   'span[data-v-fc5493f1] + span[data-v-fc5493f1]'  # Country span after flag span
+   'span.vis-flag + span'  # Alternative flag + country pattern
+   '.vis-flag + span'      # Additional flag pattern
+   ```
+   - *Purpose*: Leverage Europages' consistent flag+country display pattern for highest accuracy
+
+2. **CSS Selector Hierarchy**:
+   ```python
+   selectors = [
+       '[data-test="company-address"]',
+       '.company-address', '.company-location', '.address-details',
+       '.contact-info', '.company-details', '.profile-info',
+       '[class*="address"]', '[class*="location"]', '[class*="country"]'
+   ]
+   ```
+   - *Purpose*: Systematically check address-related elements in order of reliability
+
+3. **Country Name Dictionary** (Multi-language Support):
+   ```python
+   european_countries = {
+       'france': 'France', 'deutschland': 'Germany', 'espana': 'Spain',
+       'italia': 'Italy', 'nederland': 'Netherlands', 'uk': 'United Kingdom',
+       'österreich': 'Austria', 'ceska republika': 'Czech Republic'
+       # ... more mappings
+   }
+   ```
+   - *Purpose*: Handle multilingual country names and normalize to standard English format
+
+4. **URL-Based Detection Patterns**:
+   ```python
+   url_country_patterns = {
+       '/fr/': 'France', '/de/': 'Germany', '/it/': 'Italy',
+       '/es/': 'Spain', '/uk/': 'United Kingdom'
+   }
+   ```
+   - *Purpose*: Extract country information from URL structure as fallback method
+
+5. **Context Validation**:
+   ```python
+   # Positive Indicators
+   positive_indicators = [
+       'address', 'location', 'based in', 'located in', 'adresse', 'lieu'
+   ]
    
-  5. **Scrape company profiles**
-        - Loop through sector pages.
-        - Extract CompanyInfo objects.
-  6. Validate & filter contact details
-     Example: 
-         from contact_details_validation import ContactValidator
-         
-         validator = ContactValidator(custom_business_domains={"winery", "vineyard"})
-         is_valid = validator.email.is_valid_email("info@winery-example.com")
-         is_business = validator.email.is_business_email("info@winery-example.com")
+   # Negative Indicators  
+   negative_indicators = [
+       'ship to', 'delivery to', 'available in', 'exports to'
+   ]
+   ```
+   - *Purpose*: Distinguish between company location and service areas to avoid misclassification
 
-  7. Clean data
-     from DataProcessor import DataProcessor
+6. **Structured Data Extraction**: JSON-LD microdata parsing for `addressCountry` fields
+   - *Purpose*: Leverage structured data markup for reliable country identification
 
-    companies = DataProcessor.deduplicate_companies(companies)
-    companies = DataProcessor.deduplicate_emails(companies)
+7. **Meta Tag Analysis**: Geo-related tags (`geo.country`, `geo.region`, `DC.coverage.spatial`)
+   - *Purpose*: Extract geographic metadata embedded by website developers
 
-# Main Steps – Process Flow: A high-level process diagram for sector searching and data processing. 
-                                                      +--------------------------+
-                                                      | Start: Define multiple 
-                                                        Sector                   |
-                                                      | spefcific webpage
-                                                        from directory           |
-                                                      +-----------+--------------+
-                                                                  |
-                                                                  v
-                                                      +-----------+--------------+
-                                                      | Set DirectoryConfig       |
-                                                      | Parameters                |
-                                                      +-----------+--------------+
-                                                                  |
-                                                                  v
-                                                      +-----------+--------------+
-                                                      | Scrape Europages Sector  |
-                                                      | Pages                    |
-                                                      +-----------+--------------+
-                                                                  |
-                                                                  v
-                                                      +-----------+--------------+
-                                                      | Extract CompanyInfo      |
-                                                      | Objects                  |
-                                                      +-----------+--------------+
-                                                                  |
-                                                                  v
-                                                      +-----------+--------------+
-                                                      | Validate Email Formats   |
-                                                      +-----------+--------------+
-                                                                  |
-                                                                  v
-                                                      +-----------+--------------+
-                                                      | Check Business vs        |
-                                                      | Personal Domains         |
-                                                      +-----------+--------------+
-                                                                  |
-                                                                  v
-                                                      +-----------+--------------+
-                                                      | Remove Duplicate         |
-                                                      | Companies                |
-                                                      +-----------+--------------+
-                                                                  |
-                                                                  v
-                                                      +-----------+--------------+
-                                                      | Remove Duplicate Emails  |
-                                                      +-----------+--------------+
-                                                                  |
-                                                                  v
-                                                      +-----------+--------------+
-                                                      | Save & Export Clean Data |
-                                                      +-----------+--------------+
-                                                                  |
-                                                                  v
-                                                      +-----------+--------------+
-                                                      |           End            |
-                                                      +--------------------------+
-                                                      
-# Approach Summary
-1.Sector Selection
-  - Identify the industry keyword and relevant Europages URL.
+### 6. Cleaning
 
-2. Configuration
-   - Set CSS selectors for profile links & pagination.
+**Purpose:** Eliminate duplicates, standardize data format, and ensure dataset integrity
 
-3. Scraping
-   - Loop through pages, extract profile URLs, company names, countries, and contact details.
+- **URL-Based Deduplication**: Removed duplicate companies using unique Europages URLs as primary keys
+  - *Purpose*: Prevent duplicate companies in dataset and avoid redundant processing
+- **Cross-Company Email Deduplication**: Eliminated duplicate emails across entire dataset to prevent contact overlap
+  - *Purpose*: Ensure each business contact appears only once for clean marketing campaigns
+- **Country Name Normalization**: Standardized variations (e.g., `UK` → `United Kingdom`, `Deutschland` → `Germany`)
+  - *Purpose*: Enable consistent geographic analysis and filtering
+- **Text Sanitization**: Applied `strip()`, lowercase conversion, and HTML entity cleanup
+  - *Purpose*: Remove formatting artifacts and ensure clean, consistent text data
 
-4. Validation
-    - Use regex-based email format checks.
-  
-    - Filter out personal email providers.
-  
-    - Cleaning
-  
-    - Deduplicate by company URL.
-  
-    - Deduplicate emails across companies.
-  
-    - Export and Store results as CSV
+### 7. Export and Storage
+
+**Purpose:** Provide organized, actionable datasets for business development and marketing activities
+
+- **Structured CSV Output**: Generated two-tier export system:
+  - **Links CSV**: Company names, countries, Europages URLs, website URLs
+    - *Purpose*: Provide company discovery dataset for initial prospecting and research
+  - **Emails CSV**: Company names, countries, website URLs, extracted emails
+    - *Purpose*: Deliver actionable contact list ready for outreach campaigns
+- **Results Directory Management**: Organized outputs in dedicated `results/` folder with timestamped logging
+  - *Purpose*: Maintain organized data archives and enable process auditing
+- **Comprehensive Reporting**: Provided detailed statistics including success rates, email counts, and processing metrics
+  - *Purpose*: Enable performance monitoring, optimization decisions, and ROI assessment
+
+## File Structure
+
+```
+├── BussinessScrapingpipeline.py    # Main pipeline orchestrator
+├── contact_details_validation.py   # Email validation and business filtering
+├── contact_extraction.py          # Enhanced multi-page contact extraction
+├── core_datastructures.py         # Data models and configuration classes
+├── CSVExporter.py                 # CSV export functionality
+├── DataProcessor.py               # Data cleaning and deduplication
+├── directory_parser.py            # Directory page parsing and pagination
+├── webscraping.py                 # Core scraping engine (Selenium + requests)
+└── results/                       # Output directory for CSV files and logs
+```
+
+## Key Components
+
+### WebScrapingEngine
+- Dual-mode scraping (Selenium + requests)
+- Anti-bot detection measures
+- Automatic fallback mechanisms
+- Rate limiting and ethical scraping practices
+
+### ContactExtractor (Enhanced)
+- Multi-page email discovery
+- Contact page detection using URL patterns and keywords
+- Advanced regex patterns for obfuscated emails
+- Multilingual support for contact page discovery
+
+### ContactValidator
+- Industry-specific domain filtering
+- Comprehensive spam detection
+- Business vs. personal email classification
+
+## Usage Example
+
+```python
+from BusinessScrapingPipeline import BusinessScrapingPipeline
+
+# Define sector-specific domains
+wine_domains = {
+    'winery', 'vineyard', 'vignoble', 'weingut', 'vino', 'wine'
+}
+
+# Configure directory
+directory_config = {
+    'url': 'https://www.europages.co.uk/companies/wines.html',
+    'link_selector': 'a[data-test="company-name"]',
+    'pagination_selector': 'a[aria-label="Next page"]',
+    'max_pages': 2,
+    'business_domain_keywords': wine_domains
+}
+
+# Initialize pipeline
+pipeline = BusinessScrapingPipeline(
+    use_selenium=True,
+    results_dir="results"
+)
+
+# Run scraping
+pipeline.run_pipeline('wines', directory_config, limit_companies=20)
+```
+
+## Output Files
+
+### Links CSV Format
+```csv
+Company Name,Country,Europages URL,Company Website URL
+ACME Winery,France,https://europages.com/ACME-WINERY/...,https://acmewinery.com
+```
+
+### Emails CSV Format
+```csv
+Company Name,Country,Company Website URL,Email
+ACME Winery,France,https://acmewinery.com,contact@acmewinery.com
+```
+
+## Performance Statistics
+
+The pipeline provides comprehensive metrics:
+- Total emails extracted
+- Average emails per company  
+- Success rate percentage
+- Processing time and error counts
+- Geographic distribution analysis
+
+## Enhanced Features
+
+- **Multi-page Contact Extraction**: Automatically discovers and checks contact pages
+- **Intelligent Email Pattern Recognition**: Handles encoded, obfuscated, and spaced emails
+- **Geographic Context Validation**: Distinguishes company location from service areas
+- **Industry-Specific Validation**: Customizable domain keywords for each sector
+- **Comprehensive Deduplication**: URL-based company and cross-company email deduplication
+
+This architecture ensures robust, scalable, and maintainable business directory scraping with enterprise-grade data quality controls, multilingual support, and clear business value delivery at each stage.
