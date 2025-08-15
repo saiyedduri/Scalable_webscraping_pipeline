@@ -24,10 +24,8 @@ This pipeline orchestrates the extraction of company information from business d
 
 **Purpose:** Target specific industries for focused lead generation and improve email validation accuracy
 
-- **Industry-Specific Targeting**: Defined sector-specific domain keywords (e.g., `wine_domains`, `cnc_domains`, `energy_storage_domains`) for enhanced email validation accuracy
-  - *Purpose*: Filter out irrelevant emails and improve business email detection rates by recognizing industry-specific domains
-- **Europages URL Mapping**: Created structured directory configurations mapping each sector to specific Europages category URLs (e.g., `/companies/wines.html`, `/companies/CNC.html`)
-  - *Purpose*: Ensure targeted scraping of relevant businesses within specific industry verticals
+- **Industry-Specific Targeting**: Defined sector-specific domain keywords (e.g., `wine_domains`, `cnc_domains`, `energy_storage_domains`) for enhanced email validation accuracy to filter out irrelevant emails and improve business email detection rates by recognizing industry-specific domains
+- **Europages URL Mapping**: Created structured directory configurations mapping each sector to specific Europages category URLs (e.g., `/companies/wines.html`, `/companies/CNC.html` to ensure targeted scraping of relevant businesses within specific industry verticals
 - **Scalable Configuration**: Implemented dictionary-based sector definitions allowing easy addition of new industries
   - *Purpose*: Enable rapid expansion to new market segments without code modifications
 
