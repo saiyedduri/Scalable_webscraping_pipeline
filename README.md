@@ -26,8 +26,7 @@ This pipeline orchestrates the extraction of company information from business d
 
 - **Industry-Specific Targeting**: Defined sector-specific domain keywords (e.g., `wine_domains`, `cnc_domains`, `energy_storage_domains`) for enhanced email validation accuracy to filter out irrelevant emails and improve business email detection rates by recognizing industry-specific domains
 - **Europages URL Mapping**: Created structured directory configurations mapping each sector to specific Europages category URLs (e.g., `/companies/wines.html`, `/companies/CNC.html` to ensure targeted scraping of relevant businesses within specific industry verticals
-- **Scalable Configuration**: Implemented dictionary-based sector definitions allowing easy addition of new industries
-  - *Purpose*: Enable rapid expansion to new market segments without code modifications
+- **Scalable Configuration**: Implemented dictionary-based sector definitions allowing easy addition of new industries to enable rapid expansion to new market segments without code modifications
 
 ### 2. Configuration
 
@@ -47,7 +46,7 @@ This pipeline orchestrates the extraction of company information from business d
   - Company names via multiple fallback strategies (link text, spans, URL parsing).
   - Country extraction using Europages-specific patterns and geographical context validation using geographic segmentation for targeted marketing campaigns
   - Website URL extraction from profile pages with anti-spam filtering to btain direct company websites for comprehensive contact discovery.
-  - 
+    
 - **Contact Page Discovery**: Implemented intelligent contact page detection using URL patterns (`/contact`, `/about`) and multilingual keyword matching
   - *Purpose*: Significantly increase email discovery rates by checking dedicated contact pages beyond homepages
 
@@ -82,11 +81,9 @@ r'["\']mailto:[^"\']*["\']'
 #### Email Validation Methods:
 
 - **Business Email Filtering**: Excluded personal providers (`gmail.com`, `yahoo.com`, `hotmail.com`, `outlook.com`, `aol.com`, `icloud.com`, `mail.com`, `protonmail.com`)
-  - *Purpose*: Focus on business contacts and eliminate personal email addresses for B2B targeting
-- **Spam Pattern Detection**: Filtered emails containing `noreply`, `no-reply`, `donotreply`, `example`, `test@`, `admin@localhost`, `webmaster@`
-  - *Purpose*: Remove non-actionable and placeholder emails to improve contact list quality
-- **HTML Entity Decoding**: Converted `&#64;` to `@` and `&amp;` to `&`
-  - *Purpose*: Normalize encoded characters for proper email format validation
+   and focus on business contacts and eliminate personal email addresses for B2B targeting
+- **Spam Pattern Detection**: Filtered emails containing `noreply`, `no-reply`, `donotreply`, `example`, `test@`, `admin@localhost`, `webmaster@` and remove non-actionable and placeholder emails to improve contact list quality
+- **HTML Entity Decoding**: Converted `&#64;` to `@` and `&amp;` to `&` and normalize encoded characters for proper email format validation
 
 ### 5. Country Name Extraction Methods
 
@@ -114,7 +111,7 @@ r'["\']mailto:[^"\']*["\']'
    ```
    - *Purpose*: Systematically check address-related elements in order of reliability
 
-3. **Country Name Dictionary** (Multi-language Support):
+3. **Country Name Dictionary** (Multi-language Support):Handle multilingual country names and normalize to standard English format
    ```python
    european_countries = {
        'france': 'France', 'deutschland': 'Germany', 'espana': 'Spain',
@@ -123,18 +120,15 @@ r'["\']mailto:[^"\']*["\']'
        # ... more mappings
    }
    ```
-   - *Purpose*: Handle multilingual country names and normalize to standard English format
-
-4. **URL-Based Detection Patterns**:
+4. **URL-Based Detection Patterns**: Extract country information from URL structure as fallback method
    ```python
    url_country_patterns = {
        '/fr/': 'France', '/de/': 'Germany', '/it/': 'Italy',
        '/es/': 'Spain', '/uk/': 'United Kingdom'
    }
    ```
-   - *Purpose*: Extract country information from URL structure as fallback method
+5. **Context Validation**:  Distinguish between company location and service areas to avoid misclassification
 
-5. **Context Validation**:
    ```python
    # Positive Indicators
    positive_indicators = [
@@ -146,13 +140,10 @@ r'["\']mailto:[^"\']*["\']'
        'ship to', 'delivery to', 'available in', 'exports to'
    ]
    ```
-   - *Purpose*: Distinguish between company location and service areas to avoid misclassification
 
-6. **Structured Data Extraction**: JSON-LD microdata parsing for `addressCountry` fields
-   - *Purpose*: Leverage structured data markup for reliable country identification
+6. **Structured Data Extraction**: JSON-LD microdata parsing for `addressCountry` fields to leverage structured data markup for reliable country identification
 
-7. **Meta Tag Analysis**: Geo-related tags (`geo.country`, `geo.region`, `DC.coverage.spatial`)
-   - *Purpose*: Extract geographic metadata embedded by website developers
+7. **Meta Tag Analysis**: Geo-related tags (`geo.country`, `geo.region`, `DC.coverage.spatial`) to extract geographic metadata embedded by website developers
 
 ### 6. Cleaning
 
