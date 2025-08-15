@@ -5,6 +5,9 @@ A comprehensive web scraping solution designed to extract business contact infor
 
 This pipeline orchestrates the extraction of company information from business directories, focusing on email discovery through enhanced multi-page analysis including contact pages, about pages, and footer sections.
 
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/e3fb8f74-1158-4760-9a97-982fa58c12e1" />
+
+
 ## Implemented Features
 
 - Multi-page contact extraction with contact page discovery
