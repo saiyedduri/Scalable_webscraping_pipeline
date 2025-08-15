@@ -1,0 +1,64 @@
+    # Directories of webpages
+directories = {'wines': {
+    'url': 'https://www.europages.co.uk/companies/wines.html',
+    'link_selector': 'a[data-test="company-name"]',
+    'pagination_selector': 'a[aria-label="Next page"]',
+    'max_pages': 2,
+    'business_domain_keywords': wine_domains  
+    },
+            'cnc_machinery': {
+        'url': 'https://www.europages.co.uk/companies/CNC.html',
+        'link_selector': 'a[data-test="company-name"]',
+        'pagination_selector': 'a[aria-label="Next page"]',
+        'max_pages': 2,
+        'business_domain_keywords': cnc_domains  
+    },
+        'energy_storage': {
+        'url': 'https://www.europages.co.uk/companies/energystorage.html',
+        'link_selector': 'a[data-test="company-name"]',
+        'pagination_selector': 'a[aria-label="Next page"]',
+        'max_pages': 2,
+        'business_domain_keywords': energy_storage_domains  
+    },
+        'pharmaceuticals': {
+        'url': 'https://www.europages.co.uk/companies/pharmaceuticals.html',
+        'link_selector': 'a[data-test="company-name"]',
+        'pagination_selector': 'a[aria-label="Next page"]',
+        'max_pages': 2,
+        'business_domain_keywords': pharma_domains  
+        },
+    'textiles': {
+        'url': 'https://www.europages.co.uk/companies/textiles.html',
+        'link_selector': 'a[data-test="company-name"]',
+        'pagination_selector': 'a[aria-label="Next page"]',
+        'max_pages': 2,
+        'business_domain_keywords': textile_domains  
+        },
+    'mobile_phones': {
+        'url': 'https://www.europages.co.uk/companies/mobilephones.html',
+        'link_selector': 'a[data-test="company-name"]',
+        'pagination_selector': 'a[aria-label="Next page"]',
+        'max_pages': 2,
+        'business_domain_keywords': None  
+        },
+    'food_additives': {
+    'url': 'https://www.europages.co.uk/companies/food%20additives.html',
+    'link_selector': 'a[data-test="company-name"]',
+    'pagination_selector': 'a[aria-label="Next page"]',
+    'max_pages': 2,
+    'business_domain_keywords': None
+    },
+    'Gym_equipment': {
+    'url': 'https://www.europages.co.uk/companies/gym%20equipment.html',
+    'link_selector': 'a[data-test="company-name"]',
+    'pagination_selector': 'a[aria-label="Next page"]',
+    'max_pages': 2,
+    'business_domain_keywords': None
+    },
+    'Children_clothing': {
+    'url': 'https://www.europages.co.uk/companies/children%20clothing.html',
+    'link_selector': 'a[data-test="company-name"]',
+    'pagination_selector': 'a[aria-label="Next page"]',
+    'max_pages': 2,
+    'business_domain_keywords': None}
+    }
