@@ -2,7 +2,6 @@
 
 A comprehensive web scraping solution designed to extract business contact information from Europages directory with enhanced multi-page contact discovery and intelligent data validation.
 ## Overview
-
 This pipeline orchestrates the extraction of company information from business directories, focusing on email discovery through enhanced multi-page analysis including contact pages, about pages, and footer sections.
 
 ![Alt text](my_image.png)
